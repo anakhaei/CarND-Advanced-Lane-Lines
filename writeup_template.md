@@ -1,4 +1,4 @@
-**Advanced Lane Finding Project**
+## Advanced Lane Finding Project**
 
 The goals / steps of this project are the following:
 
@@ -65,6 +65,7 @@ Here is the image that I used. The 4 points are highlighted in the image:
 Here are the position of the src and dst points:
 
 src = np.float32 ([[735, 470], [1145, 720], [260, 720], [583, 470]])
+
 dst = np.float32 ([[1145, 0], [1145, 720], [260, 720], [260, 0]])
 
 By using "cv2.getPerspectiveTransform" and "cv2.getPerspectiveTransform", I could calculate the matrix of transformation and also the inverse one. I implemented this step in block #41 in 'carnd_advanced_lane_line.ipynd' file. 
@@ -86,6 +87,7 @@ I used the same code and equations provided in the course to calculate the curvi
 #### 6. Warp the detected lane boundaries back onto the original image.
 
 I implemenetd the code in 'Curveture Estimation' section of 'carnd_advanced_lane_line.ipynb' file in the The 'draw_lane()' function. 
+
 ![alt text][image7]
 
 
