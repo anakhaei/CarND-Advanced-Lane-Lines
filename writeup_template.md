@@ -56,7 +56,7 @@ The pipleline of image processing includes:
 * Lane Boundry detection
 * Determine the curvature of the lane and vehicle position
 * Warp the detected lane boundaries back onto the original image.
-* Disply lane curvature and vehicle position.
+* Disply lane curvature and vehicle position
 
 
 #### 1. Distortion Correction
@@ -100,26 +100,23 @@ I used almost the same code provided in the course to fit my lane lines with a 2
 
 #### 5. Determine the curvature of the lane and vehicle position
 
-By using the estimation of 
+I used the same code and equations provided in the course to calculate the curviture. To calculate the position of the car vs the lane boundray, I ....  
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. Warp the detected lane boundaries back onto the original image.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
 ![alt text][image6]
 
+### 7.  Disply lane curvature and vehicle position
 ---
 
 ### Pipeline (video)
-
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 Here's a [link to my video result](./project_video.mp4)
 
 ---
 
 ### Discussion
-
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
+This approach worked quite well on the simple video provided in the course. However, it can not handle 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
