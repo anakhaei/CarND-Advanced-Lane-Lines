@@ -19,22 +19,19 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image1]: ./images/undt_chess.png "Distortion correction"
+[image2]: ./images/undist_images.png "Distortion correction"
+[image3]: ./images/bin_img_1.png "Binary Example"
+[image4]: ./images/perspective_mat.png "Perspective Transform Matrix Calculation"
+[image5]: ./images/perspective_2.png "Warp Example"
+[image6]: ./images/windows.png "Fit Visual"
+[image7]: ./images/processed_img.png "Draw Lane"
 [video1]: ./project_video.mp4 "Video"
 
 
 ### Camera Calibration
 
-#### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
-
-I used th eprovided chessboard images to calibrate the camera. as it was used in the coursed 
-
-I start by preparing "object points" and "image points". Object points are 3D cordinates of the chessboard corners and and image points are 2D corners. By using 'cv2.findChessboardCorners', I can find the corners of the chess board and append them the image points vector. 
+I used the provided chessboard images to calibrate the camera. I start by preparing "object points" and "image points". Object points are 3D cordinates of the chessboard corners and and image points are 2D corners. By using 'cv2.findChessboardCorners', I can find the corners of the chess board and append them the image points vector. 
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.
 
@@ -44,7 +41,7 @@ This command resulted in the following matrix as the calibration matrix of the c
  [  0.00000000e+00   1.14802496e+03   3.85656234e+02]
  [  0.00000000e+00   0.00000000e+00   1.00000000e+00]]
 
-I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
+Here is the result of distortion correction on one of the chess board images by using the `cv2.undistort()`: 
 
 ![alt text][image1]
 
@@ -53,15 +50,16 @@ The pipleline of image processing includes:
 * Distortion Correction
 * Filter lane pixels
 * Perspective transform
-* Lane Boundry detection
-* Determine the curvature of the lane and vehicle position
+* Lane boundry detection
+* Determine radius of curvature
 * Warp the detected lane boundaries back onto the original image.
-* Disply lane curvature and vehicle position
+
 
 
 #### 1. Distortion Correction
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one. Here, I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result:
+To demonstrate this step, I apply my distortion correction function to the test images. I implemenetd the code of distortion correction in 'Undistort Images' section of 'carnd_advanced_lane_line.ipynb' file. My distoration correction function uses `cv2.undistort()` and the camera calibration matrix to undistort the images:
+
 
 ![alt text][image2]
 
@@ -69,7 +67,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Filter lane pixels
 
-I used a combination of color and gradient thresholds to generate a binary image. I implemented this step in block #41 in 'carnd_advanced_lane_line.ipynd' file. Here is an example of the applied filters in sample pictures:  
+I used a combination of color (saturation) and gradient thresholds to generate a binary image. I implemenetd the code in 'Filter Images' section of 'carnd_advanced_lane_line.ipynb' file. Here is an example of the applied filters in sample pictures:  
 
 ![alt text][image3]
 
@@ -77,7 +75,7 @@ I used a combination of color and gradient thresholds to generate a binary image
 This transormation will help us to see the top view of th eroad. To generate the matrix of transformation, I picked 4 points in one of the undistorded images and estimated their locations in a top view image. I used one image in which the lane is quite straight so it made life easier to estimate th eposition of the 4 points in the top view. 
 
 Here is the image that I used. The 4 points are highlighted in the image:
-![alt text][image3]
+![alt text][image4]
 
 Here are the position of the src and dst points:
 
@@ -86,34 +84,29 @@ dst = np.float32 ([[1145, 0], [1145, 720], [260, 720], [260, 0]])
 
 By using "cv2.getPerspectiveTransform" and "cv2.getPerspectiveTransform", I could calculate the matrix of transformation and also the inverse one. I implemented this step in block #41 in 'carnd_advanced_lane_line.ipynd' file. 
 
-I used the transfromation matrix to transform the following images:
-
-
-
-![alt text][image4]
-
-#### 4. Lane Boundry detection
-
-I used almost the same code provided in the course to fit my lane lines with a 2nd order polynomial kinda like this. 
+I implemenetd the code in 'Perspective Transform' section of 'carnd_advanced_lane_line.ipynb' file. I used my perspective transform function to transform the following images:
 
 ![alt text][image5]
 
-#### 5. Determine the curvature of the lane and vehicle position
+#### 4. Lane Boundry detection
 
-I used the same code and equations provided in the course to calculate the curviture. To calculate the position of the car vs the lane boundray, I ....  
-
-#### 6. Warp the detected lane boundaries back onto the original image.
-
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I used almost the same code provided in the course to fit my lane lines with a 2nd order polynomial kinda like this. I implemenetd the code in 'Curveture Estimation' section of 'carnd_advanced_lane_line.ipynb' file.
 
 ![alt text][image6]
 
-### 7.  Disply lane curvature and vehicle position
----
+#### 5. Determine the curvature of the lane and vehicle position
+
+I used the same code and equations provided in the course to calculate the curviture. I implemenetd the code in 'Curveture Estimation' section of 'carnd_advanced_lane_line.ipynb' file.
+
+#### 6. Warp the detected lane boundaries back onto the original image.
+
+I implemenetd the code in 'Curveture Estimation' section of 'carnd_advanced_lane_line.ipynb' file in the The 'draw_lane()' function. 
+![alt text][image7]
+
 
 ### Pipeline (video)
 
-Here's a [link to my video result](./project_video.mp4)
+I have applied my pipeline on the project video in the folder. Here's a [link to my video result](./project_video.mp4)
 
 ---
 
