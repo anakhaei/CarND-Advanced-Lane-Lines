@@ -96,5 +96,16 @@ I implemenetd the code in 'Curveture Estimation' section of 'carnd_advanced_lane
 I have applied my pipeline on the project video in the folder. Here's a [link to my video result](./project_video.mp4)
 
 ### Discussion
-This approach worked quite well on the simple video provided in the course. However, I have tried it as is on the harder challenge video and it could not detect the lane properly. Issues like presence of bikes and more car, light conditions and reflection of sun light, smaller radius of curvature contribute to the complexity of the video. 
+This approach worked quite well on the simple video provided in the course. However, I have tried it as is on the harder challenge video and it could not detect the lane properly. Here are the issues contributing to the complexity of the video:
+* Presence of bikes and more cars
+* Lighting condition and reflection of sun light
+* lane lines don't necessarily occupy the same pixel value (speaking of the L channel of the HLS color space)
+* smaller radius of curvaturs
+
+Different approaches can be considered to improve the performance: 
+* dynamic thresholding
+* designating a confidence level for fits and rejecting new fits that deviate beyond a certain amount
+* improving the gradient before applying the filters.
+
+I didn't have achance to apply any of these potential solutions.
   
